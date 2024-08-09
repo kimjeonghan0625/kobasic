@@ -114,19 +114,19 @@ ${pyCode}
     <>
       <Card className="max-w-[768px] mx-auto mt-11 mb-14 shadow-lg max-lg:border-none max-lg:shadow-none">
         <CardHeader>
-          <CardTitle>BASIC to Python</CardTitle>
+          <CardTitle>KoBasic to Python</CardTitle>
           <CardDescription>
-            BASIC 코드를 간단하게 Python으로 바꾸고, 실행해보세요!
+            KoBasic 코드를 간단하게 Python으로 바꾸고, 실행해보세요!
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Label>BASIC 코드 입력</Label>
+              <Label>KoBasic 코드 입력</Label>
               <Textarea
                 ref={basicCodeRef}
                 rows={8}
-                placeholder="BASIC 코드를 적어주세요"
+                placeholder="KoBasic 코드를 적어주세요"
               />
             </div>
             <Button onClick={handleTransformButtonClick}>변환하기</Button>

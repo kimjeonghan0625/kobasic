@@ -234,7 +234,7 @@ main()
     return this._makeBinary(exp, "/");
   }
   POW(exp) {
-    return this._makeBinary(exp, "^");
+    return this._makeBinary(exp, "**");
   }
   AND(exp) {
     return this._makeBinary(exp, "and");
