@@ -28,9 +28,11 @@ function App() {
   );
 
   const customPrompt = (message?: string) => {
-    const out = (window as any).output as string
+    const out = (window as any).output as string;
     const userInput = window.prompt(message ? out + message : out + ""); // 메시지를 설정합니다.
-    (window as any).output += message ? message + userInput + '\n' : "" + userInput + '\n'
+    (window as any).output += message
+      ? message + userInput + "\n"
+      : "" + userInput + "\n";
     return userInput;
   };
 
@@ -42,7 +44,7 @@ function App() {
           return customPrompt(message);
         }); // Pyodide 로드
         setPyodide(pyodideInstance);
-        (window as any).output = ""
+        (window as any).output = "";
       } catch (error) {
         console.error("Failed to load Pyodide:", error);
       }
@@ -55,7 +57,7 @@ function App() {
     if (pyodide) {
       // TypeScript에서 window 객체의 확장을 단언
       (window as any).send_output = (text: string) => {
-        (window as any).output += text
+        (window as any).output += text;
         // setExecutionResult((prev) => {
         //   if (prev === "코드 실행 결과가 여기에 출력됩니다.") {
         //     return (window as any).output;
@@ -94,7 +96,7 @@ ${pyCode}
         setExecutionResult((window as any).output);
         (window as any).output = "";
       } catch (e) {
-        setExecutionResult(`Error: ${e}`);
+        setExecutionResult(`파이썬 코드를 실행하는 과정에서 에러가 발생했습니다.\n\n에러 로그는 다음과 같습니다:\n${e}`);
       }
     } else {
       return "파이썬 실행환경이 아직 준비되지 않았습니다.";
@@ -102,12 +104,18 @@ ${pyCode}
   }
 
   const handleTransformButtonClick = async () => {
-    const pyCodeGen = new PyCodeGen();
-    const basicCode = replaceSmartQuotes(basicCodeRef.current?.value);
-    const pyCode = pyCodeGen.compile(basicCode);
+    try {
+      const pyCodeGen = new PyCodeGen();
+      const basicCode = replaceSmartQuotes(basicCodeRef.current?.value);
+      const pyCode = pyCodeGen.compile(basicCode);
 
-    setPythonCode(pyCode);
-    await runPythonCode(pyCode);
+      setPythonCode(pyCode);
+      await runPythonCode(pyCode);
+    } catch (e) {
+      setPythonCode(
+        `파이썬으로 코드를 변환하는 과정에서 에러가 발생했습니다. KoBasic 문법에 이상이 없는지 확인하세요.\n\n에러 로그는 다음과 같습니다:\n${e}`
+      );
+    }
   };
 
   return (
