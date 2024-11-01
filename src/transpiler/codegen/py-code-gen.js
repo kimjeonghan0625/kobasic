@@ -311,7 +311,7 @@ ${this.gen(exp.action)
   FOR(exp) {
     const g = this.gen.bind(this);
     let code = `for ${g(exp.var)} in range(${g(exp.start)}, ${
-      Number(g(exp.end)) + 1
+      g(exp.end)
     }${exp.step ? `, ${g(exp.step)}` : ""}):`;
     this.forStack.push(this.midList.length); // this.midList.length는 midList에서 for문을 담고 있는 문장함수의 인덱스가 됨.
     return code;
