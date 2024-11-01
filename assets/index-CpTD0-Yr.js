@@ -138,7 +138,7 @@ print()
 `}IF(t){return`if ${this.gen(t.expr)}:
 ${this.gen(t.action).split(`
 `).map(r=>this._ind(this.indent)+r.trim()).join(`
-`)}`}FOR(t){const r=this.gen.bind(this);let n=`for ${r(t.var)} in range(${r(t.start)}, ${Number(r(t.end))+1}${t.step?`, ${r(t.step)}`:""}):`;return this.forStack.push(this.midList.length),n}NEXT(t){try{let r=t.varlist.length;for(;r>0;)this.forStack.pop(),r--}catch(r){console.log(r)}return"pass"}_makeBinary(t,r){return`(${this.gen(t.left)} ${r} ${this.gen(t.right)})`}_ind(t){return" ".repeat(t)}_header(t){return`
+`)}`}FOR(t){const r=this.gen.bind(this);let n=`for ${r(t.var)} in range(${r(t.start)}, ${r(t.end)}${t.step?`, ${r(t.step)}`:""}):`;return this.forStack.push(this.midList.length),n}NEXT(t){try{let r=t.varlist.length;for(;r>0;)this.forStack.pop(),r--}catch(r){console.log(r)}return"pass"}_makeBinary(t,r){return`(${this.gen(t.left)} ${r} ${this.gen(t.right)})`}_ind(t){return" ".repeat(t)}_header(t){return`
 def stmt${t.lineNum}():
 `}}function x1(){const[e,t]=j.useState(null),r=j.useRef(null),[n,l]=j.useState("파이썬 코드가 여기에 출력됩니다."),[o,i]=j.useState("코드 실행 결과가 여기에 출력됩니다."),s=m=>{const p=window.output,g=window.prompt(m?p+m:p+"");return window.output+=m?m+g+`
 `:""+g+`
